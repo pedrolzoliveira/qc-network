@@ -3,15 +3,22 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     
-      return queryInterface.createTable('championships', { 
+      return queryInterface.createTable('parts', { 
         id: {
           type: Sequelize.INTEGER,
+          allowNull: false,
           primaryKey: true,
-          autoIncrement: true,
+        },
+        part_id: {
+          type: Sequelize.INTEGER,
           allowNull: false,
         },
-        tournament_id: {
-          type: Sequelize.INTEGER,
+        in_player: {
+          type: Sequelize.BOOLEAN,
+          allowNull: false,
+        },
+        in_team: {
+          type: Sequelize.BOOLEAN,
           allowNull: false,
         },
         created_at: {
@@ -27,7 +34,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     
-      return queryInterface.dropTable('championships');
+      return queryInterface.dropTable('parts');
     
   }
 };

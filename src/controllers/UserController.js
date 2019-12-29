@@ -11,18 +11,16 @@ function generateToken(params = {}) {
 module.exports = {
 
     async index(req, res) {
-        const user = await User.findByPk(req.params.id, {attributes: ['nickname', 'email']});
+        const user = await User.findByPk(req.params.id, {attributes: ['name', 'email']});
         return res.json(user);
     },
 
     async store(req, res) {
-        let { nickname, email, password } = req.body;
-
+        let { name, email, password } = req.body;
         if (await User.findOne({where: {email: email}}) == null) {
             password = await bcrypt.hash(password, 10);
-            let user = await User.create( {nickname, email, password} );
-            let user_retorn = {nickname, email};
-            return res.json({user_return, token: generateToken()});
+            await User.create( {name, email, password} );
+            return res.json({name, email, token: generateToken()});
         } 
         return res.json({error: "Email já cadastrado!"});   
     },
@@ -30,7 +28,7 @@ module.exports = {
     async login(req, res) {
         const { email, password } = req.body;
 
-        const user = await User.findOne({where: {email: email}, attributes: ['id', 'nickname', 'email', 'password']});
+        const user = await User.findOne({where: {email: email}, attributes: ['id', 'name', 'email', 'password']});
 
         if (!user) 
             return res.status(400).send({error: "Email não cadastrado!"});
@@ -38,7 +36,7 @@ module.exports = {
         if (!await bcrypt.compare(password, user.password))
             return res.status(400).send({error: "Senha inválida!"});
 
-        let user_return = {nickname: user.nickname, email: user.email};
+        let user_return = {name: user.name, email: user.email};
 
         return res.json({user_return, token: generateToken()});
     }

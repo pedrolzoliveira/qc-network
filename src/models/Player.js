@@ -1,18 +1,25 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Part extends Model {
+class Player extends Model {
     static init(sequelize) {
         super.init({
             id: {
                 type: DataTypes.INTEGER,
+                autoIncrement: true,
                 primaryKey: true,
             },
-            part_id: {
+            user_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                references: {
+                    model: 'users',
+                    key: 'id',
+                },
             },
-            in_player: DataTypes.BOOLEAN,
-            in_team: DataTypes.BOOLEAN,
+            nickname: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
         }, {
             sequelize
         })
@@ -20,4 +27,4 @@ class Part extends Model {
 }
 
 
-module.exports = Part;
+module.exports = Player;

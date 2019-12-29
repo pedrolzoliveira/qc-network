@@ -1,41 +1,48 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Match extends Model {
+class Team extends Model {
     static init(sequelize) {
         super.init({
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            part1_id: {
-                type: DataTypes.INTEGER,
+            name: {
+                type: DataTypes.STRING,
                 allowNull: false,
-                references: {
-                    model: 'Parts',
-                    key: 'id',
-                },
             },
-            part2_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Parts',
-                    key: 'id',
-                    }
-                },
-            winner_id: {
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                references: {
-                    model: 'Parts',
-                    key: 'id',
-                    }
-                },
         }, {
             sequelize
         })
     }
 }
 
+class TeamMembers extends Model {
+    static init(sequelize) {
+        super.init({
+           team_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'teams',
+                    key: 'id',
+                },
+           },
+           player_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'players',
+                    key: 'id',
+                },
+           }, 
+        },
+        {
+            sequelize,
+            modelName: 'team_players',
+        })
+    }
+}
 
-module.exports = Match;
+
+module.exports = {Team, TeamMembers};

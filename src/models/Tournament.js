@@ -3,9 +3,8 @@ const { Model, DataTypes } = require('sequelize');
 class Tournament extends Model {
     static init(sequelize) {
         super.init({
-            id: {
+            tournament_id: {
                 type: DataTypes.INTEGER,
-                primaryKey: true,
             },
             stage: {
                 type: DataTypes.INTEGER,

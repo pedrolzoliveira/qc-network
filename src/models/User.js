@@ -7,7 +7,7 @@ class User extends Model {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            nickname: DataTypes.STRING,
+            name: DataTypes.STRING,
             email: DataTypes.STRING,
             password: DataTypes.STRING,
         }, {
