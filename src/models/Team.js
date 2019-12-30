@@ -7,6 +7,14 @@ class Team extends Model {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
+            player_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'players',
+                    key: 'id',
+                },
+            },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -36,6 +44,10 @@ class TeamMembers extends Model {
                     key: 'id',
                 },
            }, 
+           in_admin: {
+               type: DataTypes.BOOLEAN,
+               allowNull: false,
+           },
         },
         {
             sequelize,

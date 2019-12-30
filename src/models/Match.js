@@ -7,6 +7,13 @@ class Match extends Model {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
+            tournament_id: {
+                type: DataTypes.INTEGER,
+                references: {
+                    model: 'Tournaments',
+                    key: 'id',
+                },
+            },
             part1_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
