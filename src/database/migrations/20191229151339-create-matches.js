@@ -3,12 +3,16 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     
-      return queryInterface.createTable('matchs', { 
+      return queryInterface.createTable('matches', { 
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,
           allowNull: false,
+        },
+        tournament_id: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
         },
         part1_id: {
           type: Sequelize.INTEGER,
@@ -42,7 +46,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     
-      return queryInterface.dropTable('matchs');
+      return queryInterface.dropTable('matches');
     
   }
 };

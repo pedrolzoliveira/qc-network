@@ -10,6 +10,14 @@ module.exports = {
           autoIncrement: true,
           allowNull: false,
         },
+        user_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'players',
+            key: 'id',
+          },
+        },
         name: {
           type: Sequelize.STRING,
           allowNull: false,

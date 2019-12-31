@@ -22,6 +22,11 @@ module.exports = {
             key: 'id'
           }
         },
+        in_admin: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: false,
+        },
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,

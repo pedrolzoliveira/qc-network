@@ -8,6 +8,7 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
           primaryKey: true,
+          autoIncrement: true,
         },
         part_id: {
           type: Sequelize.INTEGER,

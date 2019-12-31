@@ -6,6 +6,7 @@ class Part extends Model {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
+                autoIncrement: true,
             },
             part_id: {
                 type: DataTypes.INTEGER,

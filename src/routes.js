@@ -13,6 +13,10 @@ const routes = express.Router();
 routes.get('/users/:id', auth, UserController.index);
 routes.post('/users', UserController.store);
 routes.post('/login', UserController.login);
-routes.post('/player', PlayerController.store)
+routes.post('/player', PlayerController.store);
+routes.post('/part', PartController.store);
+routes.post('/match', MatchController.store);
+
+
 
 module.exports = routes;

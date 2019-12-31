@@ -13,6 +13,10 @@ class Tournament extends Model {
             match_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                references: {
+                    model: 'matches',
+                    key: 'id',
+                },
             },
         }, {
             sequelize
