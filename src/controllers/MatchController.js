@@ -1,14 +1,25 @@
 const Match = require('../models/Match');
 const Part = require('../models/Part');
 
+
 module.exports = {
 
     async store(req, res) {
         try {
             const { part1_id, part2_id, tournament_id } =  req.body;
-            if (!part1_id || !part2_id) return res.json({error: 'Participantes não informados!'});
+            if (!part1_id || !part2_id) return res.json({error: 'Algum participante não foi informado!'});
             
-            if (!await Part.findOne({where: {id: part1_id}})) res.json({error: 'Participante 1 não encontrado!'});
+            if (part1_id == part2_id) return res.json({error: 'Participantes informados são iguais'});
+            
+            let part1 = await Part.findOne({where: {id: part1_id}});
+            if (!part1) res.json({error: 'Participante 1 não encontrado!'});
+            
+            let part2 = await Part.findOne({where: {id: part2_id}});
+            if (!part2) res.json({error: 'Participante 1 não encontrado!'});
+            
+            if (part1.in_player != part2.in_player || part1.in_team != part2.in_team) return res.json({error: ''})
+
+            res.json({error: 'Participante 1 não encontrado!'});
             if (!await Part.findOne({where: {id: part2_id}})) res.json({error: 'Participante 2 não encontrado!'});
             
                       

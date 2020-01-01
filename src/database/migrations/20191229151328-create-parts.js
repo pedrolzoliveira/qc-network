@@ -17,10 +17,12 @@ module.exports = {
         in_player: {
           type: Sequelize.BOOLEAN,
           allowNull: false,
+          dafaultValue: false,
         },
         in_team: {
           type: Sequelize.BOOLEAN,
           allowNull: false,
+          dafaultValue: false,
         },
         created_at: {
           type: Sequelize.DATE,

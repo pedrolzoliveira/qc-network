@@ -12,8 +12,14 @@ class Part extends Model {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            in_player: DataTypes.BOOLEAN,
-            in_team: DataTypes.BOOLEAN,
+            in_player: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+            },
+            in_team: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false,
+            },
         }, {
             sequelize
         })
