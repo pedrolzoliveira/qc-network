@@ -5,14 +5,17 @@ class Tournament extends Model {
         super.init({
             tournament_id: {
                 type: DataTypes.INTEGER,
+                primaryKey: true,
             },
             stage: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                primaryKey: true,
             },
             match_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                primaryKey: true,
                 references: {
                     model: 'matches',
                     key: 'id',
@@ -23,6 +26,5 @@ class Tournament extends Model {
         })
     }
 }
-
 
 module.exports = Tournament;

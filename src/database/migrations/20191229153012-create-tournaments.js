@@ -7,14 +7,17 @@ module.exports = {
         tournament_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          primaryKey: true,
         },
         stage: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          primaryKey: true,
         },
         match_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          primaryKey: true,
           references: {
             model: 'Matches',
             key: 'id'
