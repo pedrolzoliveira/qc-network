@@ -32,9 +32,8 @@ module.exports = {
             const {player_id, admin_id, team_id} = req.body;
             if (!await TeamMembers.findOne({where: {player_id: admin_id, team_id: team_id, in_admin: true}}) && player_id != admin_id) return res.json({error: 'Usuário não é administrador.'});
             if (!await TeamMembers.findOne({where: {player_id: player_id, team_id: team_id}})) return res.json({error: 'Usuário não esta no time'});            
-            TeamMembers.delete({where: {player_id: player_id}});
+            TeamMembers.destroy({where: {player_id: player_id}});
             return res.json({ok: true});
-            
         } catch(err) {
             res.json({error: err.message});
         }
