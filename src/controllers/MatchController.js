@@ -26,6 +26,36 @@ async function addMatch(json_request) {
     }
 }
 
+async function ModifyMatch(params) {
+    try {
+        const {id, part1_id, part2_id, tournament_id, winner_id} = params;
+        const match = await Match.findOne({where: {id: id}});
+        if (!match) return {error: 'Match não encontrada!'};
+        if (winner_id && (part1_id || part2_id)) return {error: 'Não é permitido mudar o participante e atualizar o vencedor no mesmo instante'};
+        if (part1_id) if (part1_id == match.part1_id || part1_id == match.part2_id) return {error: 'Participante 1 já está na partida!'};
+        if (part2_id) if (part2_id == match.part1_id || part2_id == match.part2_id) return {error: 'Participante 2 já está na partida!'};
+        if (part1_id == part2_id) return {error: 'Participantes iguais informados'};
+        if (part1_id) if (!await Part.findOne({where: {id: part1_id}})) return {error: 'Participante 1 informado não encontrado!'};
+        if (part2_id) if (!await Part.findOne({where: {id: part2_id}})) return {error: 'Participante 2 informado não encontrado!'};
+        if (tournament_id) if (!await Tournament.findOne({where: {tournament_id: tournament_id}})) return {error: 'Torneio informado não encontrado'};    
+        if (winner_id) if (winner_id != match.part1_id && winner_id != match.part2_id) return {error: 'Vencedor não está na partida!'};
+        
+        if (part1_id) 
+            match.update({part1_id: part1_id});
+        if (part2_id) 
+            match.update({part2_id: part2_id});
+        if (tournament_id) 
+            match.update({tournament_id: tournament_id});
+        if (winner_id) 
+            match.update({winner_id: winner_id});
+        //return {id: match.id, tournament_id: match.tournament_id, part1_id: match.part1_id, part2_id: match.part2_id, winner_id: match.winner_id};
+        return {match};
+    } catch(err) {
+        return {error: err.message};
+    }
+}
+
+
 async function store(req, res) {
     try {
         const { part1_id, part2_id, tournament_id } = req.body;
@@ -38,5 +68,6 @@ async function store(req, res) {
 
 module.exports = {
     addMatch,
-    store,
+    ModifyMatch,
+    store
 };
