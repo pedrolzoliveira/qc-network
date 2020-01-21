@@ -28,6 +28,7 @@ async function addMatch(json_request) {
 
 async function ModifyMatch(params) {
     try {
+        const promises = [];
         const {id, part1_id, part2_id, tournament_id, winner_id} = params;
         const match = await Match.findOne({where: {id: id}});
         if (!match) return {error: 'Match não encontrada!'};
@@ -41,15 +42,16 @@ async function ModifyMatch(params) {
         if (winner_id) if (winner_id != match.part1_id && winner_id != match.part2_id) return {error: 'Vencedor não está na partida!'};
         
         if (part1_id) 
-            match.update({part1_id: part1_id});
+            promises.push(match.update({part1_id: part1_id}));
         if (part2_id) 
-            match.update({part2_id: part2_id});
+            promises.push(match.update({part2_id: part2_id}));
         if (tournament_id) 
-            match.update({tournament_id: tournament_id});
+            promises.push(match.update({tournament_id: tournament_id}));
         if (winner_id) 
-            match.update({winner_id: winner_id});
+            promises.push(match.update({winner_id: winner_id}));
         //return {id: match.id, tournament_id: match.tournament_id, part1_id: match.part1_id, part2_id: match.part2_id, winner_id: match.winner_id};
-        return {match};
+        //return {match};
+        return Promise.all(promises).then(result => {result});
     } catch(err) {
         return {error: err.message};
     }
