@@ -37,7 +37,7 @@ async function store(req, res) {
 async function login(req, res) {
     try {
         const { email, password } = req.body;
-
+        
         const user = await User.findOne({where: {email: email}, attributes: ['id', 'name', 'email', 'password']});
 
         if (!user) 

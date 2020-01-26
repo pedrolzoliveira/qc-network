@@ -51,7 +51,7 @@ async function ModifyMatch(params) {
             promises.push(match.update({winner_id: winner_id}));
         //return {id: match.id, tournament_id: match.tournament_id, part1_id: match.part1_id, part2_id: match.part2_id, winner_id: match.winner_id};
         //return {match};
-        return Promise.all(promises).then(result => {result});
+        return await Promise.all(promises);
     } catch(err) {
         return {error: err.message};
     }

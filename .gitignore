@@ -108,3 +108,6 @@ yarn.lock
 
 # secret
 src/config/auth.json
+
+#debug vscode
+.vscode
