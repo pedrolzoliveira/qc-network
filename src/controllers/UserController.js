@@ -24,9 +24,9 @@ async function store(req, res) {
         if (await User.findOne({where: {email: email}}) == null) {
             password = await bcrypt.hash(password, 10);
             await User.create( {name, email, password} );
-            return res.json({name, email, token: generateToken()});
+            return res.json({ok: true, name, email, token: generateToken()});
         } 
-        return res.json({error: "Email já cadastrado!"});   
+        return res.json({ok: false, error: "Email já cadastrado!"});   
     } catch(err) {
         res.json({error: err.message});
     }
@@ -41,14 +41,14 @@ async function login(req, res) {
         const user = await User.findOne({where: {email: email}, attributes: ['id', 'name', 'email', 'password']});
 
         if (!user) 
-            return res.status(400).send({error: "Email não cadastrado!"});
+            return res.status(400).send({ok: false, error: "Email não cadastrado!"});
         
         if (!await bcrypt.compare(password, user.password))
-            return res.status(400).send({error: "Senha inválida!"});
+            return res.status(400).send({ok: false, error: "Senha inválida!"});
 
         let user_return = {name: user.name, email: user.email};
 
-        return res.json({user_return, token: generateToken()});
+        return res.json({ok: true, user_return, token: generateToken()});
     } catch(err) {
         res.json({error: err.message});
     }
