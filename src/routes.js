@@ -10,9 +10,10 @@ const auth = require('./middlewares/auth');
 
 const routes = express.Router();
 
-routes.get('/', PageController.Home);
-routes.get('/login', PageController.Login);
+routes.get('/', auth, PageController.Home);
+routes.get('/login', auth, PageController.Login);
 routes.get('/users/:id', auth, UserController.index);
+routes.post('/logout', UserController.logout);
 routes.post('/signup', UserController.store);
 routes.post('/session', UserController.login);
 routes.post('/player', PlayerController.store);

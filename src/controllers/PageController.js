@@ -1,13 +1,8 @@
-const Page = require('../models/Page');
-const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth.json');
-
-
 async function Home(req, res) {
     try {
-        page = new Page(req);
-        if (page.GetCookie('SESSIONPASS') == undefined)
-            res.render('index');
+        if (req.IsAuth)
+            return res.render('home');
+        return res.render('index');
     } catch(err) {
         res.send(err.message);
     }
@@ -15,9 +10,11 @@ async function Home(req, res) {
 
 async function Login(req, res) {
     try {
-        res.render('login');
+        if (!req.IsAuth)
+            return res.render('login');
+        return res.redirect('/');
     } catch(err) {
-        
+        return res.render('error');
     }
 }
 

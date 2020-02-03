@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 
 require('./database');
@@ -10,6 +11,7 @@ app.set('view engine', 'ejs');
 
 app.use('/', express.static(__dirname + '/static'));
 app.use(express.json());
+app.use(cookieParser());
 app.use(routes);
 
 app.listen(3333);

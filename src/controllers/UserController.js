@@ -1,12 +1,6 @@
 const User = require('../models/User');
+const Token = require('../models/Token');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth.json');
-
-
-function generateToken(params = {}) {
-    return jwt.sign( { id: params.id}, authConfig.secret, {expiresIn: 86400});
-}
 
 async function index(req, res) {
     try {
@@ -23,8 +17,8 @@ async function store(req, res) {
         let { name, email, password } = req.body;
         if (await User.findOne({where: {email: email}}) == null) {
             password = await bcrypt.hash(password, 10);
-            await User.create( {name, email, password} );
-            return res.json({ok: true, name, email, token: generateToken()});
+            const user = await User.create( {name, email, password} );
+            return res.json({ok: true, name, email, token: Token.generateToken(user)});
         } 
         return res.json({ok: false, error: "Email já cadastrado!"});   
     } catch(err) {
@@ -47,10 +41,26 @@ async function login(req, res) {
             return res.status(400).send({ok: false, error: "Senha inválida!"});
 
         let user_return = {name: user.name, email: user.email};
-
-        return res.json({ok: true, user_return, token: generateToken()});
+        const token = Token.generateToken(user);
+        res.cookie('user_session', token);
+        return res.json({ok: true, user_return, token: token});
     } catch(err) {
-        res.json({error: err.message});
+        res.json({ok: false, error: err.message});
+    }
+}
+
+async function logout(req, res) {
+    try {
+        const token = req.cookies['user_session'];
+        if (!token) return res.json({error: 'já deslogado.'});
+        res.clearCookie('user_session');
+        const solved = Token.solveToken(token);
+        //adicionando a lista negra
+        const retorno = await Token.create({token: token, due_date: new Date(solved.exp * 1000)});
+        return retorno;
+    } catch(err) {
+        console.error(err);
+        return res.json({error: err.message});
     }
 }
 
@@ -58,4 +68,5 @@ module.exports = {
     index,
     store,
     login,
+    logout
 };

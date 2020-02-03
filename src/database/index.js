@@ -7,7 +7,7 @@ const {Team, TeamMembers} = require('../models/Team');
 const Part = require('../models/Part');
 const Match = require('../models/Match');
 const Tournament = require('../models/Tournament');
-
+const Token = require('../models/Token');
 
 
 const connection = new Sequelize(dbConfig);
@@ -19,5 +19,7 @@ TeamMembers.init(connection);
 Part.init(connection);
 Match.init(connection);
 Tournament.init(connection);
+Token.init(connection);
+
 
 module.exports = connection;

@@ -16,5 +16,7 @@ form.addEventListener('submit', function(e) {
     .then(result => result.json())
     .then(json => {
         console.log(json);
+        if (json.ok)
+            location.reload();
     });
 });
