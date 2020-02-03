@@ -13,7 +13,7 @@ class Token extends Model {
                 primaryKey: true,
                 allowNull: false,
             },
-            due_date: DataTypes.DATE,
+            due_date: DataTypes.INTEGER,
         }, {
             sequelize,
             tableName: 'token_blacklist',

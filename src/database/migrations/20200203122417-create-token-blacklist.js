@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
       },
       due_date: {
-        type: Sequelize.DATE,
+        type: Sequelize.INTEGER,
         allowNull: true,
       } 
     });
