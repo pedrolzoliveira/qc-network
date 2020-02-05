@@ -3,7 +3,9 @@ const Player = require('../models/Player');
 
 async function store(req, res) {
     try {
-        const {user_id, nickname} = req.body; 
+        const {user_id, nickname} = req.body;
+        if (await Player.findOne({where: {user_id: user_id}}))
+            return res.json({error: 'Usuario já possui um player'});
         const player = await Player.create( {user_id, nickname} );
         return res.json(player);
     }

@@ -1,13 +1,27 @@
 const {Team, TeamMembers} = require('../models/Team');
+const sequelize = require('sequelize');
 
 async function store(req, res) {
+    const t = sequelize.Transaction();
     try {
         const {player_id, name} = req.body;
         if (await Team.findOne({where: {player_id: player_id, name: name}})) return res.json({error: 'Usuário já tem um time com este nome'});
-        const team = Team.Create({player_id, name});
-        const team_members = TeamMembers.Create({player_id, team_id: team.id, in_admin: true});
+        const team = Team.Create({
+            player_id, 
+            name
+        }, {transaction: t});
+
+        const team_members = TeamMembers.Create({
+            player_id, 
+            team_id: team.id, 
+            in_admin: true
+        }, {transaction: t});
+
+        await t.commit();
+
         return res.json({team, team_members});
     } catch(err) {
+        await t.rollback();
         res.json({error: err.message});
     }
 }

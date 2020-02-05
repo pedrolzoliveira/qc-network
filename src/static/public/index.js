@@ -4,8 +4,9 @@ form.addEventListener('submit', function(e) {
     e.preventDefault()
 
     const myData = JSON.stringify(formDataToJson(new FormData(this)));
-    //if (!)
+    //if (!name.value().trim() || !email.value().trim() || !password.value().trim())
     //    return alert('Preencha todas as informações!');
+
     fetch('/signup', {
         method: 'POST',
         body: myData,
@@ -19,4 +20,5 @@ form.addEventListener('submit', function(e) {
         if (json.ok)
             location.reload();
     });
+    
 });

@@ -12,7 +12,11 @@ async function store(req, res) {
          if (in_player) if (!await Player.findOne({where: {id: part_id}})) return res.json({error: 'Jogador não cadastrado!'});
          if (in_team) if (!await Team.findOne({where: {id: part_id}})) return res.json({error: 'Time não cadastrado!'});
          if (await Part.findOne({where: {part_id: part_id, in_player: in_player, in_team: in_team}})) return res.json({error: 'Participante já cadastrado!'});
-         let part = await Part.create({part_id, in_team, in_player});
+         let part = await Part.create({
+            part_id, 
+            in_team, 
+            in_player
+        });
          return res.json({part});
     } catch(err) {
         res.json({error: err.message});

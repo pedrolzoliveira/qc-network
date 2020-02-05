@@ -20,6 +20,6 @@ routes.post('/player', PlayerController.store);
 routes.post('/part', PartController.store);
 routes.post('/match', MatchController.store);
 routes.post('/tournament', TournamentController.addMatch);
-
+routes.post('/ctournament', TournamentController.createTournament);
 
 module.exports = routes;
