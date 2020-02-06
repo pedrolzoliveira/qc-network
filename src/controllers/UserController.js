@@ -37,7 +37,10 @@ async function store(req, res) {
             }, {transaction: t});
 
             const token = Token.generateToken(user);
-            res.cookie('user_session', token, {maxAge: 1000 * 60 * 60 * 24});
+            res.cookie('user_session', token, {
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24
+            });
             await t.commit();
             return res.json({ok: true, name, email, token: token});
         } 
@@ -67,7 +70,10 @@ async function login(req, res) {
 
         let user_return = {name: user.name, email: user.email};
         const token = Token.generateToken(user);
-        res.cookie('user_session', token, {maxAge: 1000 * 60 * 60 * 24});
+        res.cookie('user_session', token, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24
+        });
         return res.json({ok: true, user_return, token: token});
     } catch(err) {
         res.json({ok: false, error: err.message});

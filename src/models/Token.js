@@ -27,8 +27,8 @@ class Token extends Model {
 
     static solveToken(token) {
         return jwt.verify(token, authConfig.secret, (err, decoded) => {
-            if (err) return err;
-            return decoded;
+            if (err) return {ok: false, error: err.message};
+            return {ok:true, decoded};
         });
     }
 }

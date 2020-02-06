@@ -13,7 +13,9 @@ async function auth(req, res, next) {
 
     const solved = Token.solveToken(token);
 
-    if (solved.err) return next();
+    if (!solved.ok)
+        return next();
+
     req.userId = solved.id;
     req.IsAuth = true;
     return next();
