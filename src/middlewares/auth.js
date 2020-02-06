@@ -16,8 +16,8 @@ async function auth(req, res, next) {
     if (!solved.ok)
         return next();
 
-    req.userId = solved.id;
-    req.IsAuth = true;
+    req.userId = solved.decoded.id;
+    req.IsAuth = solved.ok;
     return next();
 }
 
