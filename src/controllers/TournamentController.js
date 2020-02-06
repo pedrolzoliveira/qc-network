@@ -1,6 +1,5 @@
 const Tournament = require('../models/Tournament');
 const Match = require('../models/Match');
-const sequelize = require('sequelize');
 const Part = require('../models/Part');
 
 async function addMatch(req, res) {

@@ -6,6 +6,7 @@ class Team extends Model {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
+                autoIncrement: true,
             },
             player_id: {
                 type: DataTypes.INTEGER,

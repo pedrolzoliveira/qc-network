@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const Token = require('../models/Token');
+const Salt = require('../models/Salt');
 const bcrypt = require('bcryptjs');
+const connection = require('../database/index');
 
 async function index(req, res) {
     try {
@@ -9,23 +11,39 @@ async function index(req, res) {
     } catch(err) {
         res.json({error: err.message});
     }
-
 }
 
 async function store(req, res) {
+
+    const t = await connection.transaction();
     try {
         let { name, email, password } = req.body;
         if (!name.trim() || !email.trim() || !password.trim())
             return res.json({ok: false, error: 'campos nulos ou em branco.'});
         if (await User.findOne({where: {email: email}}) == null) {
-            password = await bcrypt.hash(password, 10);
-            const user = await User.create( {name, email, password} );
+            
+            const saltstring = await Salt.GenerateSalt(15);
+            password = await bcrypt.hash(password + saltstring, 10);
+
+            const user = await User.create({
+                name, 
+                email, 
+                password
+            }, {transaction: t});
+
+            const salt = await Salt.create({
+                user_id: user.id, 
+                salt: saltstring
+            }, {transaction: t});
+
             const token = Token.generateToken(user);
-            res.cookie('user_session', token);
+            res.cookie('user_session', token, {maxAge: 1000 * 60 * 60 * 24});
+            await t.commit();
             return res.json({ok: true, name, email, token: token});
         } 
         return res.json({ok: false, error: "Email já cadastrado!"});   
     } catch(err) {
+        await t.rollback();
         res.json({error: err.message});
     }
 
@@ -43,12 +61,13 @@ async function login(req, res) {
         if (!user) 
             return res.status(400).send({ok: false, error: "Email não cadastrado!"});
         
-        if (!await bcrypt.compare(password, user.password))
+        const salt = await Salt.findByPk(user.id);
+        if (!await bcrypt.compare(password + salt.salt, user.password))
             return res.status(400).send({ok: false, error: "Senha inválida!"});
 
         let user_return = {name: user.name, email: user.email};
         const token = Token.generateToken(user);
-        res.cookie('user_session', token);
+        res.cookie('user_session', token, {maxAge: 1000 * 60 * 60 * 24});
         return res.json({ok: true, user_return, token: token});
     } catch(err) {
         res.json({ok: false, error: err.message});

@@ -4,7 +4,9 @@ async function Home(req, res) {
             return res.render('home');
         return res.render('index');
     } catch(err) {
-        res.send(err.message);
+        console.error(err);
+        return res.render('error');
+        
     }
 }
 
@@ -14,6 +16,7 @@ async function Login(req, res) {
             return res.render('login');
         return res.redirect('/');
     } catch(err) {
+        console.error(err);
         return res.render('error');
     }
 }
