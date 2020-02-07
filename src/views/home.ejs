@@ -3,15 +3,9 @@
         <script src="public/home.js" defer="defer"></script>
     </head>
     <body>
-        Bem vindo!<br>
+        Bem vindo, <%= name %>!<br>
         <form action="/logout" id="formulario" method="POST">
             <input type="submit" value="Deslogar">
         </form>
-
-        <form action="/ctournament" id="tournament_form" method="POST">
-            <input type="text" id="json">
-            <input type="submit" value="submit">
-        </form>  
-
     </body>
 </html>

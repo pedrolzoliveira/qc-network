@@ -49,8 +49,6 @@ async function store(req, res) {
         await t.rollback();
         res.json({error: err.message});
     }
-
-    
 }
 
 async function login(req, res) {
@@ -84,9 +82,15 @@ async function logout(req, res) {
     try {
         const token = req.cookies['user_session'];
         if (!token) return res.json({ok: true});
+        
         const solved = Token.solveToken(token);
+        if (!solved.ok) return res.json({ok: true});
+
         //adicionando a lista negra
-        const retorno = await Token.create({token: token, due_date: solved.exp});
+        const retorno = await Token.create({
+            token: token, 
+            due_date: solved.decoded.exp
+        });
         res.clearCookie('user_session');
         return res.json({ok: true});
     } catch(err) {

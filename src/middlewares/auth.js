@@ -7,7 +7,7 @@ async function auth(req, res, next) {
     if (!token)
         return next()
 
-    const token_blacklist = await Token.findByPk(token);
+    const token_blacklist = await Token.findByPk(token, {attributes: ['token']});
     if (token_blacklist)
         return next();
 
@@ -16,7 +16,7 @@ async function auth(req, res, next) {
     if (!solved.ok)
         return next();
 
-    req.userId = solved.decoded.id;
+    req.user = solved.decoded;
     req.IsAuth = solved.ok;
     return next();
 }

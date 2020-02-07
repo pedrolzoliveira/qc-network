@@ -1,12 +1,12 @@
-const form = document.getElementById('form');
-
 form.addEventListener('submit', function(e) {
     e.preventDefault()
 
-    const myData = JSON.stringify(formDataToJson(new FormData(this)));
-    //if (!name.value().trim() || !email.value().trim() || !password.value().trim())
-    //    return alert('Preencha todas as informações!');
+    if (!nome.value.trim() || !email.value.trim() || !password.value.trim())
+        return alert('Preencha todas as informações!');
 
+
+    const myData = JSON.stringify(formDataToJson(new FormData(this)));
+    
     fetch('/signup', {
         method: 'POST',
         body: myData,
