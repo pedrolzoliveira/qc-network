@@ -1,9 +1,11 @@
 form.addEventListener('submit', function(e) {
     e.preventDefault()
 
-    if (!nome.value.trim() || !email.value.trim() || !password.value.trim())
+    if (!nome.value.trim() || !email.value.trim() || !password.value || !password_confirm.value)
         return alert('Preencha todas as informações!');
 
+    if (password.value != password_confirm.value)
+        return alert('Senha e confirmação devem ser iguais!');
 
     const myData = JSON.stringify(formDataToJson(new FormData(this)));
     
@@ -20,5 +22,4 @@ form.addEventListener('submit', function(e) {
         if (json.ok)
             location.reload();
     });
-    
 });
