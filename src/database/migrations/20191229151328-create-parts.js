@@ -10,19 +10,21 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true,
         },
-        part_id: {
+        player_id: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
+          references: {
+            model: 'Players',
+            key: 'id',
+          },
         },
-        in_player: {
-          type: Sequelize.BOOLEAN,
-          allowNull: false,
-          dafaultValue: false,
-        },
-        in_team: {
-          type: Sequelize.BOOLEAN,
-          allowNull: false,
-          dafaultValue: false,
+        team_id: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'Teams',
+            key: 'id',
+          },
         },
         created_at: {
           type: Sequelize.DATE,

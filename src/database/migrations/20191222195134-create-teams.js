@@ -10,7 +10,7 @@ module.exports = {
           autoIncrement: true,
           allowNull: false,
         },
-        player_id: {
+        creator_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {

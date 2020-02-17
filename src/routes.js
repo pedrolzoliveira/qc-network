@@ -12,7 +12,7 @@ const routes = express.Router();
 
 routes.get('/', auth, PageController.Home);
 routes.get('/login', auth, PageController.Login);
-routes.get('/users/:id', auth, UserController.index);
+routes.get('/tournaments', auth, PageController.Tournaments);
 routes.get('/*', PageController.Error404);
 
 routes.post('/logout', UserController.logout);
@@ -23,6 +23,7 @@ routes.post('/part', PartController.store);
 routes.post('/match', MatchController.store);
 routes.post('/tournament', TournamentController.addMatch);
 routes.post('/ctournament', TournamentController.createTournament);
+routes.post('/mytournaments', TournamentController.myTournaments);
 
 
 module.exports = routes;

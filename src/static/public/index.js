@@ -21,5 +21,8 @@ form.addEventListener('submit', function(e) {
         console.log(json);
         if (json.ok)
             location.reload();
+        else {
+            alert(json.error);
+        }
     });
 });

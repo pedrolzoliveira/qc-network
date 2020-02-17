@@ -1,8 +1,8 @@
 const {Team, TeamMembers} = require('../models/Team');
-const sequelize = require('sequelize');
+const connection = require('../database/index');
 
 async function store(req, res) {
-    const t = sequelize.Transaction();
+    const t = connection.transaction();
     try {
         const {player_id, name} = req.body;
         if (await Team.findOne({where: {player_id: player_id, name: name}})) return res.json({error: 'Usuário já tem um time com este nome'});

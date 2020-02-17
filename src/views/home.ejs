@@ -3,7 +3,8 @@
         <script src="public/home.js" defer="defer"></script>
     </head>
     <body>
-        Bem vindo, <%= name %>!<br>
+        Bem vindo, <%= props.user.name %>!<br>
+        <a href="/tournaments">Torneios</a><br>
         <form action="/logout" id="formulario" method="POST">
             <input type="submit" value="Deslogar">
         </form>

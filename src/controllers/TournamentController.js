@@ -1,9 +1,10 @@
 const Tournament = require('../models/Tournament');
 const Match = require('../models/Match');
 const Part = require('../models/Part');
+const connection = require('../database/index');
 
 async function addMatch(req, res) {
-    
+    const t = await connection.transaction();
     try {
         const {tournament_id, stage, part1_id, part2_id} = req.body;
 
@@ -23,24 +24,24 @@ async function addMatch(req, res) {
             stage,
             part1_id, 
             part2_id
-        });
+        }, {transaction: t});
 
         const tournament = await Tournament.create({
             tournament_id,
             stage, 
             match_id: match.id
-        });
+        }, {transaction: t});
 
-        //await t.commit();
+        await t.commit();
         return res.json({tournament});
     } catch(err) {
-        //await t.rollback();
+        await t.rollback();
         return res.json({error: err.message});
     }
 }
 
 async function createTournament(req, res) {
-    //const t = await sequelize.Transaction();
+    const t = await connection.transaction();
     try {
         const {part1_id, part2_id, tournament_id, stage} = req.body;
 
@@ -56,15 +57,24 @@ async function createTournament(req, res) {
             part1_id,
             part2_id,
             tournament_id
-        });
+        }, {transaction: t});
 
         const tournament = await Tournament.create({
             tournament_id,
             stage,
             match_id : firstMatch.id
-        });
-        
+        }, {transaction: t});
+        await t.commit();
         return res.json({firstMatch, tournament});
+    } catch(err) {
+        await t.rollback();
+        return res.json({error: err.message});
+    }
+}
+
+async function myTournaments(req, res) {
+    try {
+        return res.json({'teste': 'testando'});
     } catch(err) {
         return res.json({error: err.message});
     }
@@ -72,5 +82,6 @@ async function createTournament(req, res) {
 
 module.exports = {
     addMatch,
-    createTournament
+    createTournament,
+    myTournaments
 };

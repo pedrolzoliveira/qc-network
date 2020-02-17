@@ -22,7 +22,7 @@ class Token extends Model {
     }
 
     static generateToken(params) {
-        return jwt.sign( { id: params.id, name: params.name}, authConfig.secret, {expiresIn: 86400});
+        return jwt.sign( { id: params.id, name: params.name, email: params.email}, authConfig.secret, {expiresIn: 86400});
     }
 
     static solveToken(token) {

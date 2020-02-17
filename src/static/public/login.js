@@ -2,6 +2,9 @@
 form.addEventListener('submit', function(e) {
     e.preventDefault()
 
+    if (!email.value.trim() || !password.value)
+        return alert('informações em branco!');
+
     const myData = JSON.stringify(formDataToJson(new FormData(this)));
     
     fetch('/session', {
@@ -16,5 +19,8 @@ form.addEventListener('submit', function(e) {
         console.log(json);
         if (json.ok)
             location.reload();
+        else {
+            alert(json.error);
+        }
     });
 });

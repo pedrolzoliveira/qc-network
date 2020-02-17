@@ -18,7 +18,7 @@ async function store(req, res) {
     const t = await connection.transaction();
     try {
         let { name, email, password } = req.body;
-        if (!name.trim() || !email.trim() || !password.trim())
+        if (!name.trim() || !email.trim() || !password)
             return res.json({ok: false, error: 'campos nulos ou em branco.'});
         if (await User.findOne({where: {email: email}}) == null) {
             

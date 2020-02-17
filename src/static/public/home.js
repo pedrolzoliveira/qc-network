@@ -8,6 +8,9 @@ formulario.addEventListener('submit', function(e) {
     .then(json => {
         if (json.ok)
             location.reload();
+        else {
+            alert(json.error);
+        }
     })
     .catch(err => console.log(err.message))
 });
