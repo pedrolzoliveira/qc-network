@@ -16,6 +16,7 @@ module.exports = {
           references: {
             model: 'Tournaments',
             key: 'id',
+            OnUpdate: 'CASCADE',
           },
         },
         part1_id: {
@@ -23,7 +24,8 @@ module.exports = {
           allowNull: false,
           references: {
             model: 'Parts',
-            key: 'id'
+            key: 'id',
+            OnUpdate: 'CASCADE',
           },
         },
         part2_id: {
@@ -31,7 +33,8 @@ module.exports = {
           allowNull: false,
           references: {
             model: 'Parts',
-            key: 'id'
+            key: 'id',
+            OnUpdate: 'CASCADE',
           }
         },
         winner_id: {
@@ -39,7 +42,8 @@ module.exports = {
           allowNull: true,
           references: {
             model: 'Parts',
-            key: 'id'
+            key: 'id',
+            OnUpdate: 'CASCADE',
           }      
         },
         created_at: {

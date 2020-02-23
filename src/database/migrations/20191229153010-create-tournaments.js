@@ -24,6 +24,7 @@ module.exports = {
           references: {
             model: 'currencies',
             key: 'id',
+            onUpdate: 'CASCADE',
           },
         },
         winner_id: {
@@ -32,6 +33,7 @@ module.exports = {
           references: {
             model: 'Parts',
             key: 'id',
+            onUpdate: 'CASCADE',
           },
         },
         start_at: {

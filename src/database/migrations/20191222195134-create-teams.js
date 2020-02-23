@@ -16,6 +16,7 @@ module.exports = {
           references: {
             model: 'players',
             key: 'id',
+            onUpdate: 'CASCADE',
           },
         },
         name: {

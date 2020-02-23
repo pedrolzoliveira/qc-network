@@ -10,7 +10,9 @@ module.exports = {
           key: true,
           references: {
             model: 'teams',
-            key: 'id'
+            key: 'id',
+            OnUpdate: 'CASCADE',
+            OnDelete: 'CASCADE',
           }
         },
         player_id: {
@@ -19,7 +21,9 @@ module.exports = {
           key: true,
           references: {
             model: 'players',
-            key: 'id'
+            key: 'id', 
+            OnUpdate: 'CASCADE',
+            OnDelete: 'CASCADE',
           }
         },
         in_admin: {

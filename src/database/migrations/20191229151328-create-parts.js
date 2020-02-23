@@ -16,6 +16,8 @@ module.exports = {
           references: {
             model: 'Players',
             key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE',
           },
         },
         team_id: {
@@ -24,6 +26,8 @@ module.exports = {
           references: {
             model: 'Teams',
             key: 'id',
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE',
           },
         },
         created_at: {

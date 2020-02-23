@@ -9,7 +9,9 @@ module.exports = {
         primaryKey: true,
         references: {
           model: 'users',
-          key: 'id'
+          key: 'id',
+          OnUpdate: 'CASCADE',
+          OnDelte: 'CASCADE',
         }
       },
       salt: {

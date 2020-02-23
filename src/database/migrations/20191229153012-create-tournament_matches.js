@@ -3,14 +3,15 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     
-      return queryInterface.createTable('tournament-matches', { 
+      return queryInterface.createTable('tournament_matches', { 
         tournament_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           primaryKey: true,
           references: {
             model: 'Tournaments',
-            key: 'id'
+            key: 'id',
+            OnUpdate: 'CASCADE',
           }
         },
         stage: {
@@ -24,7 +25,9 @@ module.exports = {
           primaryKey: true,
           references: {
             model: 'Matches',
-            key: 'id'
+            key: 'id',
+            OnUpdate: 'CASCADE',
+            OnDelete: 'CASCADE'
           }
         },
         created_at: {
@@ -40,7 +43,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     
-      return queryInterface.dropTable('tournament-matches');
+      return queryInterface.dropTable('tournament_matches');
     
   }
 };
