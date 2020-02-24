@@ -3,27 +3,51 @@ const { Model, DataTypes } = require('sequelize');
 class Tournament extends Model {
     static init(sequelize) {
         super.init({
-            tournament_id: {
+            id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-            },
-            stage: {
-                type: DataTypes.INTEGER,
                 allowNull: false,
-                primaryKey: true,
-            },
-            match_id: {
+                autoIncrement: true,
+              },
+              price: {
+                allowNull: true,
                 type: DataTypes.INTEGER,
-                allowNull: false,
-                primaryKey: true,
+              },
+              prize: {
+                allowNull: true,
+                type: DataTypes.INTEGER,
+              },
+              currency: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
                 references: {
-                    model: 'matches',
-                    key: 'id',
+                  model: 'currencies',
+                  key: 'id',
+                  onUpdate: 'CASCADE',
                 },
-            },
+              },
+              winner_id: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                  model: 'Parts',
+                  key: 'id',
+                  onUpdate: 'CASCADE',
+                },
+              },
+              start_at: {
+                type: DataTypes.DATE,
+              },
+              ended_at: {
+                type: DataTypes.DATE,
+              },
         }, {
             sequelize
         })
+    }
+
+    static associate(models) {
+        this.hasMany(models.Match, {foreignKey: 'id'});
     }
 }
 

@@ -8,17 +8,25 @@ class Part extends Model {
                 primaryKey: true,
                 autoIncrement: true,
             },
-            part_id: {
+            player_id: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            in_player: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false,
-            },
-            in_team: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false,
+                allowNull: true,
+                references: {
+                    model: 'Players',
+                    key: 'id',
+                    OnUpdate: 'CASCADE',
+                    OnDelete: 'CASCADE',
+                },
+            team_id: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                    model: 'Teams',
+                    key: 'id',
+                    OnUpdate: 'CASCADE',
+                    OnDelete: 'CASCADE',
+                }
+            }
             },
         }, {
             sequelize

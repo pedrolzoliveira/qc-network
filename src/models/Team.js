@@ -8,12 +8,13 @@ class Team extends Model {
                 primaryKey: true,
                 autoIncrement: true,
             },
-            player_id: {
+            creator_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
                     model: 'players',
                     key: 'id',
+                    OnUpdate: 'CASCADE',
                 },
             },
             name: {
@@ -23,6 +24,10 @@ class Team extends Model {
         }, {
             sequelize
         })
+    }
+
+    static associate(models) {
+        this.hasMany(models.Player, {foreignKey: 'id'});
     }
 }
 

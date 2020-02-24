@@ -14,6 +14,8 @@ class Player extends Model {
                 references: {
                     model: 'users',
                     key: 'id',
+                    OnUpdate: 'CASCADE',
+                    OnDelete: 'CASCADE'
                 },
             },
             nickname: {
@@ -23,6 +25,12 @@ class Player extends Model {
         }, {
             sequelize
         })
+    }
+
+    static associate(models) {
+        this.belongsToMany(models.Team, {foreignKey: 'id'});
+        this.belongsTo(models.User, {foreignKey: 'id'});
+        this.hasOne(models.Part, {foreignKey: 'id'});
     }
 }
 

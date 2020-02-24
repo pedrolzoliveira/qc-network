@@ -7,38 +7,51 @@ class Match extends Model {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-            },
-            tournament_id: {
-                type: DataTypes.INTEGER,
-                allowNull: true,
-            },
-            part1_id: {
-                type: DataTypes.INTEGER,
                 allowNull: false,
-                references: {
-                    model: 'Parts',
-                    key: 'id',
-                },
-            },
-            part2_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Parts',
-                    key: 'id',
-                    }
-                },
-            winner_id: {
+              },
+              tournament_id: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 references: {
-                    model: 'Parts',
-                    key: 'id',
-                    }
+                  model: 'Tournaments',
+                  key: 'id',
+                  OnUpdate: 'CASCADE',
                 },
+              },
+              part1_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                  model: 'Parts',
+                  key: 'id',
+                  OnUpdate: 'CASCADE',
+                },
+              },
+              part2_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                  model: 'Parts',
+                  key: 'id',
+                  OnUpdate: 'CASCADE',
+                }
+              },
+              winner_id: {
+                type: DataTypes.INTEGER,    
+                allowNull: true,
+                references: {
+                  model: 'Parts',
+                  key: 'id',
+                  OnUpdate: 'CASCADE',
+                }      
+              },
         }, {
             sequelize
         })
+    }
+
+    static associate(models) {
+        this.belongsTo(models.Tournament, {foreignKey: 'id'});
     }
 }
 

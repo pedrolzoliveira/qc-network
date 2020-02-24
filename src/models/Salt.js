@@ -6,22 +6,28 @@ class Salt extends Model {
         super.init({
             user_id: {
                 type: DataTypes.INTEGER,
-                primaryKey: true,
                 allowNull: false,
+                primaryKey: true,
                 references: {
-                    model: 'users',
-                    key: 'id',
-                },
-            },
-            salt: {
+                  model: 'users',
+                  key: 'id',
+                  OnUpdate: 'CASCADE',
+                  OnDelte: 'CASCADE',
+                }
+              },
+              salt: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            } 
+              } 
         }, {
             sequelize,
             tableName: 'salt',
             timestamps: false,
         })
+    }
+
+    static associate(models) {
+        this.belongsTo(models.User, {foreignKey: 'id'});
     }
 
     static async GenerateSalt(length) {

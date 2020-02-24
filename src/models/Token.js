@@ -10,10 +10,13 @@ class Token extends Model {
         super.init({
             token: {
                 type: DataTypes.STRING,
-                primaryKey: true,
                 allowNull: false,
-            },
-            due_date: DataTypes.INTEGER,
+                primaryKey: true,
+              },
+              due_date: {
+                type: DataTypes.DATE,
+                allowNull: true,
+              }
         }, {
             sequelize,
             tableName: 'token_blacklist',

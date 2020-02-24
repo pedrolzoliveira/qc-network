@@ -15,6 +15,11 @@ class User extends Model {
             sequelize
         })
     }
+
+    static associate(models) {
+        this.hasOne(models.Salt, {foreignKey: 'user_id'});
+        this.hasOne(models.Player, {foreignKey: 'id'});
+    }
 }
 
 module.exports = User;
