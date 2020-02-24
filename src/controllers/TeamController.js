@@ -1,25 +1,22 @@
 const {Team, TeamMembers} = require('../models/Team');
+const Player = require('../models/Player');
 const connection = require('../database/index');
 
 async function store(req, res) {
-    const t = connection.transaction();
+    const t = await connection.transaction();
     try {
-        const {player_id, name} = req.body;
-        if (await Team.findOne({where: {player_id: player_id, name: name}})) return res.json({error: 'Usuário já tem um time com este nome'});
-        const team = Team.Create({
-            player_id, 
+        const {creator_id, name} = req.body;
+        if (await Team.findOne({where: {creator_id: creator_id, name: name}})) return res.json({error: 'Usuário já tem um time com este nome'});
+        const team = await Team.create({
+            creator_id, 
             name
         }, {transaction: t});
 
-        const team_members = TeamMembers.Create({
-            player_id, 
-            team_id: team.id, 
-            in_admin: true
-        }, {transaction: t});
+        const team_member = await team.addPlayer(await Player.findByPk(creator_id), {transaction: t});
 
         await t.commit();
 
-        return res.json({team, team_members});
+        return res.json({team, team_member});
     } catch(err) {
         await t.rollback();
         res.json({error: err.message});

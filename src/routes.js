@@ -5,6 +5,8 @@ const PartController = require('./controllers/PartController');
 const TournamentController = require('./controllers/TournamentController');
 const PlayerController = require('./controllers/PlayerController');
 const PageController = require('./controllers/PageController');
+const TeamController = require('./controllers/TeamController');
+
 
 const auth = require('./middlewares/auth');
 
@@ -24,6 +26,6 @@ routes.post('/match', MatchController.store);
 routes.post('/tournament', TournamentController.addMatch);
 routes.post('/ctournament', TournamentController.createTournament);
 routes.post('/mytournaments', TournamentController.myTournaments);
-
+routes.post('/team', TeamController.store);
 
 module.exports = routes;

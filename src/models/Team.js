@@ -27,7 +27,7 @@ class Team extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Player, {foreignKey: 'id'});
+        this.belongsToMany(models.Player, {foreignKey: 'player_id', through: 'team_players', as: 'players'});
     }
 }
 

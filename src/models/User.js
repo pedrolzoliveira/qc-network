@@ -17,8 +17,8 @@ class User extends Model {
     }
 
     static associate(models) {
-        this.hasOne(models.Salt, {foreignKey: 'user_id'});
-        this.hasOne(models.Player, {foreignKey: 'id'});
+        this.hasOne(models.Salt, {foreignKey: 'user_id', as: 'salt'});
+        this.hasOne(models.Player, {foreignKey: 'id', as: 'player'});
     }
 }
 

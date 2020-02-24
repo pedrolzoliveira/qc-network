@@ -51,7 +51,7 @@ class Match extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Tournament, {foreignKey: 'id'});
+        this.belongsTo(models.Tournament, {foreignKey: 'id', as: 'tournament'});
     }
 }
 

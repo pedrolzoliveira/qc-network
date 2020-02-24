@@ -27,7 +27,7 @@ class Salt extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.User, {foreignKey: 'id'});
+        this.belongsTo(models.User, {foreignKey: 'id', as: 'user'});
     }
 
     static async GenerateSalt(length) {

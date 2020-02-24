@@ -27,7 +27,7 @@ module.exports = {
           }
         },
         in_admin: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false,
         },

@@ -47,7 +47,7 @@ class Tournament extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Match, {foreignKey: 'id'});
+        this.hasMany(models.Match, {foreignKey: 'id', as: 'match'});
     }
 }
 

@@ -32,6 +32,11 @@ class Part extends Model {
             sequelize
         })
     }
+
+    static associate(models) {
+        this.belongsTo(models.Team, {foreignKey: 'id', as: 'team'});
+        this.belongsTo(models.Player, {foreignKey: 'id', as: 'player'});
+    }
 }
 
 
