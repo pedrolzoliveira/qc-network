@@ -14,6 +14,7 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        nickname: Sequelize.STRING,
         email: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -34,8 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    
-      return queryInterface.dropTable('users');
-    
+    return queryInterface.dropTable('users');
   }
 };

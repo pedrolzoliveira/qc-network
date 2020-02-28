@@ -15,12 +15,12 @@ module.exports = {
             OnDelete: 'CASCADE',
           }
         },
-        player_id: {
+        user_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           key: true,
           references: {
-            model: 'players',
+            model: 'users',
             key: 'id', 
             OnUpdate: 'CASCADE',
             OnDelete: 'CASCADE',

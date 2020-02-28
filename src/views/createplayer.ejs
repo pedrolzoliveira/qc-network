@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <script src="public/comum.js" defer="defer"></script>
+        <script src="public/createplayer.js" defer="defer"></script>
+    </head>
+    <body>
+        <div>
+            Bem vindo, <%= props.user.name %>! O cadastro ainda não acabou!<br>
+            Por favor, nos informe seu nickname: 
+            <form method="POST" action="/player" id="formulario">
+                <input type="text" name="nickname">
+                <input type="hidden" name="user_id" value="<%=props.user.id%>">
+            </form>
+        </div>
+    </body>
+</html>

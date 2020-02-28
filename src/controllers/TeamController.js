@@ -1,5 +1,5 @@
-const {Team, TeamMembers} = require('../models/Team');
-const Player = require('../models/Player');
+const Team = require('../models/Team');
+const User = require('../models/User');
 const connection = require('../database/index');
 
 async function store(req, res) {
@@ -12,7 +12,7 @@ async function store(req, res) {
             name
         }, {transaction: t});
 
-        const team_member = await team.addPlayer(await Player.findByPk(creator_id), {transaction: t});
+        const team_member = await team.addUser(await User.findByPk(creator_id), {transaction: t});
 
         await t.commit();
 
@@ -22,7 +22,7 @@ async function store(req, res) {
         res.json({error: err.message});
     }
 }
-
+/*
 async function addMember(req, res) {
     try {
         const {player_id, admin_id, team_id, player_in_admin} = req.body;
@@ -47,9 +47,9 @@ async function kickMember(req, res) {
         res.json({error: err.message});
     }
 }
-
+*/
 module.exports = {
     store,
-    addMember,
-    kickMember    
+    //addMember,
+    //kickMember    
 };

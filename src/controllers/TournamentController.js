@@ -1,6 +1,5 @@
 const Tournament = require('../models/Tournament');
 const Match = require('../models/Match');
-const Part = require('../models/Part');
 const connection = require('../database/index');
 
 async function addMatch(req, res) {

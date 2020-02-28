@@ -18,7 +18,8 @@ class User extends Model {
 
     static associate(models) {
         this.hasOne(models.Salt, {foreignKey: 'user_id', as: 'salt'});
-        this.hasOne(models.Player, {foreignKey: 'id', as: 'player'});
+        this.belongsToMany(models.Team, {foreignKey: 'user_id', through: 'team_players', as: 'team'});
+        this.belongsToMany(models.Match, {foreignKey: 'user_id', through: 'matches_parts', as: 'matches'});
     }
 }
 

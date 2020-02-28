@@ -27,40 +27,8 @@ class Team extends Model {
     }
 
     static associate(models) {
-        this.belongsToMany(models.Player, {foreignKey: 'player_id', through: 'team_players', as: 'players'});
+        this.belongsToMany(models.User, {foreignKey: 'user_id', through: 'team_players', as: 'players'});
     }
 }
 
-class TeamMembers extends Model {
-    static init(sequelize) {
-        super.init({
-           team_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'teams',
-                    key: 'id',
-                },
-           },
-           player_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'players',
-                    key: 'id',
-                },
-           }, 
-           in_admin: {
-               type: DataTypes.BOOLEAN,
-               allowNull: false,
-           },
-        },
-        {
-            sequelize,
-            modelName: 'team_players',
-        })
-    }
-}
-
-
-module.exports = {Team, TeamMembers};
+module.exports = Team;

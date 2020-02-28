@@ -1,30 +1,51 @@
 const Match = require('../models/Match');
-const Part = require('../models/Part');
-
-async function store(req, res) {
-    try {
-        const { part1_id, part2_id} =  req.body;
-        if (!part1_id || !part2_id) return {error: 'Algum participante não foi informado!'};
-        
-        if (part1_id == part2_id) return {error: 'Participantes informados são iguais'};
-
-        if ((await Promise.all([Part.findByPk(part1_id), Part.findByPk(part2_id)])).includes(null))
-            return res.json({error: 'Algum participante não foi encontrado!'});
-            
-        if (part1.in_player != part2.in_player || part1.in_team != part2.in_team) return {error: 'Tipo dos participantes não coincidem!'};
-
-        let match = await Match.create({
-            part1_id, 
-            part2_id, 
-            tournament_id
-        });
-        return res.json({match});
-    } catch(err) {
-        return res.json({error: err.message});
-    }
-}
+const User = require('../models/User');
+const Team = require('../models/Team');
 
 
 module.exports = {
-    store
+
+    async addTeam(req, res) {
+        try {
+
+            const {team1_id, team2_id} = req.body;
+            if (!team1_id || !team2_id)
+                return res.json({error: 'times não informados!'});
+
+            if (team1_id == team2_id)
+                return res.json({error: 'times informados são iguais!'});
+
+            const teams = await Promise.all([Team.findByPk(team1_id), Team.findByPk(team2_id)]);
+            if(teams.includes(null))
+                return res.json({error: 'um dos times informados não existe!'});
+            
+            const matches = await Promise.all([Match.addTeam(teams[0]), Match.addTeam(teams[1])]);
+            
+            return res.json(matches); 
+        } catch(err) {
+            return res.json({error: err.message});
+        }
+    },
+
+    async addUser(req, res) {
+        try {
+            
+            const {user1_id, user2_id} = req.body;
+            if (!user1_id || !user2_id)
+                return res.json({error: 'usuarios não informados!'});
+
+            if (user1_id == user2_id)
+                return res.json({error: 'usuarios informados são iguais!'});
+
+            const users = await Promise.all([User.findByPk(user1_id), User.findByPk(user2_id)]);
+            if(users.includes(null))
+                return res.json({error: 'um dos usuarios informados não existe!'});
+            
+            const matches = await Promise.all([Match.addUser(users[0]), Match.addUser(users[1])]);
+            
+            return res.json(matches); 
+        } catch(err) {
+            return res.json({error: err.message});
+        }
+    }
 };

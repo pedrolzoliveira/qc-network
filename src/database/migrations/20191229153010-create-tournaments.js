@@ -27,14 +27,23 @@ module.exports = {
             onUpdate: 'CASCADE',
           },
         },
-        winner_id: {
+        winner_user: {
           type: Sequelize.INTEGER,
           allowNull: true,
           references: {
-            model: 'Parts',
+            model: 'users',
             key: 'id',
             onUpdate: 'CASCADE',
           },
+        },
+        winner_team: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          references: {
+            model: 'teams',
+            key: 'id',
+            onUpdate: 'CASCADE',
+          }, 
         },
         start_at: {
           type: Sequelize.DATE,
@@ -54,8 +63,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    
-      return queryInterface.dropTable('tournaments');
-    
+    return queryInterface.dropTable('tournaments');
   }
 };

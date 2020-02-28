@@ -22,8 +22,8 @@ async function store(req, res) {
             return res.json({ok: false, error: 'campos nulos ou em branco.'});
         if (await User.findOne({where: {email: email}}) == null) {
             
-            const saltstring = await Salt.GenerateSalt(15);
-            password = await bcrypt.hash(password + saltstring, 10);
+            const salt = await Salt.GenerateSalt(15);
+            password = await bcrypt.hash(password + salt, 10);
 
             const user = await User.create({
                 name, 
@@ -31,9 +31,8 @@ async function store(req, res) {
                 password
             }, {transaction: t});
 
-            const salt = await Salt.create({
-                user_id: user.id, 
-                salt: saltstring
+            await user.createSalt({
+                salt
             }, {transaction: t});
 
             const token = Token.generateToken(user);

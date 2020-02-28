@@ -9,7 +9,7 @@ class Match extends Model {
                 autoIncrement: true,
                 allowNull: false,
               },
-              tournament_id: {
+            tournament_id: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 references: {
@@ -18,33 +18,24 @@ class Match extends Model {
                   OnUpdate: 'CASCADE',
                 },
               },
-              part1_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                  model: 'Parts',
-                  key: 'id',
-                  OnUpdate: 'CASCADE',
-                },
-              },
-              part2_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                  model: 'Parts',
-                  key: 'id',
-                  OnUpdate: 'CASCADE',
-                }
-              },
-              winner_id: {
+            winner_user: {
                 type: DataTypes.INTEGER,    
                 allowNull: true,
                 references: {
-                  model: 'Parts',
+                  model: 'users',
                   key: 'id',
                   OnUpdate: 'CASCADE',
                 }      
               },
+            winner_team: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                  model: 'teams',
+                  key: 'id',
+                  OnUpdate: 'CASCADE',
+                }
+              }
         }, {
             sequelize
         })
@@ -52,6 +43,8 @@ class Match extends Model {
 
     static associate(models) {
         this.belongsTo(models.Tournament, {foreignKey: 'id', as: 'tournament'});
+        this.belongsToMany(models.User, {foreignKey: 'user_id', through: 'matches_parts', as: 'users'});
+        this.belongsToMany(models.Team, {foreignKey: 'team_id', through: 'matches_parts', as: 'teams'});
     }
 }
 

@@ -12,12 +12,8 @@ module.exports = {
             model: 'Tournaments',
             key: 'id',
             OnUpdate: 'CASCADE',
+            OnDelete: 'CASCADE'
           }
-        },
-        stage: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          primaryKey: true,
         },
         match_id: {
           type: Sequelize.INTEGER,
@@ -29,6 +25,11 @@ module.exports = {
             OnUpdate: 'CASCADE',
             OnDelete: 'CASCADE'
           }
+        },
+        stage: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          primaryKey: true,
         },
         created_at: {
           type: Sequelize.DATE,
@@ -42,8 +43,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    
       return queryInterface.dropTable('tournament_matches');
-    
   }
 };

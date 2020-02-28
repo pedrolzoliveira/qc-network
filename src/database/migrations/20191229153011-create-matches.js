@@ -19,32 +19,29 @@ module.exports = {
             OnUpdate: 'CASCADE',
           },
         },
-        part1_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
+        winner_user: {
+          type: Sequelize.INTEGER,    
+          allowNull: true,
           references: {
-            model: 'Parts',
+            model: 'users',
             key: 'id',
             OnUpdate: 'CASCADE',
-          },
+          }      
         },
-        part2_id: {
+        winner_team: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
           references: {
-            model: 'Parts',
+            model: 'teams',
             key: 'id',
             OnUpdate: 'CASCADE',
           }
         },
-        winner_id: {
-          type: Sequelize.INTEGER,    
-          allowNull: true,
-          references: {
-            model: 'Parts',
-            key: 'id',
-            OnUpdate: 'CASCADE',
-          }      
+        start_at: {
+          type: Sequelize.DATE,
+        },
+        ended_at: {
+          type: Sequelize.DATE,
         },
         created_at: {
           type: Sequelize.DATE,
