@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const TeamPlayers = require('./TeamPlayers');
 
 class User extends Model {
     static init(sequelize) {
@@ -18,7 +19,7 @@ class User extends Model {
 
     static associate(models) {
         this.hasOne(models.Salt, {foreignKey: 'user_id', as: 'salt'});
-        this.belongsToMany(models.Team, {foreignKey: 'user_id', through: 'team_players', as: 'team'});
+        this.belongsToMany(models.Team, {foreignKey: 'user_id', through: TeamPlayers, as: 'team'});
         this.belongsToMany(models.Match, {foreignKey: 'user_id', through: 'matches_parts', as: 'matches'});
     }
 }

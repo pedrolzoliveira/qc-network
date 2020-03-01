@@ -20,9 +20,9 @@ routes.post('/signup', UserController.store);
 routes.post('/session', UserController.login);
 routes.post('/addteammatch', MatchController.addTeam);
 routes.post('/addusermatch', MatchController.addUser);
-routes.post('/tournament', TournamentController.addMatch);
-routes.post('/ctournament', TournamentController.createTournament);
-routes.post('/mytournaments', TournamentController.myTournaments);
-routes.post('/team', TeamController.store);
+routes.post('/team', auth, TeamController.store);
+
+routes.post('/tournament', TournamentController.createTournament);
+routes.post('/addteamtournament', TournamentController.addTeamMatch);
 
 module.exports = routes;

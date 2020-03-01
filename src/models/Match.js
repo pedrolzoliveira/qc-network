@@ -18,6 +18,9 @@ class Match extends Model {
                   OnUpdate: 'CASCADE',
                 },
               },
+            stage: {
+                type: DataTypes.INTEGER,
+            },
             winner_user: {
                 type: DataTypes.INTEGER,    
                 allowNull: true,
@@ -43,8 +46,8 @@ class Match extends Model {
 
     static associate(models) {
         this.belongsTo(models.Tournament, {foreignKey: 'id', as: 'tournament'});
-        this.belongsToMany(models.User, {foreignKey: 'user_id', through: 'matches_parts', as: 'users'});
-        this.belongsToMany(models.Team, {foreignKey: 'team_id', through: 'matches_parts', as: 'teams'});
+        this.belongsToMany(models.User, {foreignKey: 'match_id', through: 'matches_parts', as: 'users'});
+        this.belongsToMany(models.Team, {foreignKey: 'match_id', through: 'matches_parts', as: 'teams'});
     }
 }
 

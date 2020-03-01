@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const TeamPlayers = require('./TeamPlayers');
 
 class Team extends Model {
     static init(sequelize) {
@@ -12,7 +13,7 @@ class Team extends Model {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: 'players',
+                    model: 'users',
                     key: 'id',
                     OnUpdate: 'CASCADE',
                 },
@@ -27,7 +28,7 @@ class Team extends Model {
     }
 
     static associate(models) {
-        this.belongsToMany(models.User, {foreignKey: 'user_id', through: 'team_players', as: 'players'});
+        this.belongsToMany(models.User, {foreignKey: 'team_id', through: TeamPlayers, as: 'user'});
     }
 }
 

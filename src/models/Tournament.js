@@ -9,15 +9,15 @@ class Tournament extends Model {
                 allowNull: false,
                 autoIncrement: true,
               },
-              price: {
+            price: {
                 allowNull: true,
                 type: DataTypes.INTEGER,
               },
-              prize: {
+            prize: {
                 allowNull: true,
                 type: DataTypes.INTEGER,
               },
-              currency: {
+            currency: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 references: {
@@ -26,19 +26,28 @@ class Tournament extends Model {
                   onUpdate: 'CASCADE',
                 },
               },
-              winner_id: {
+            winner_user: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
                 references: {
-                  model: 'Parts',
+                  model: 'users',
                   key: 'id',
-                  onUpdate: 'CASCADE',
+                  OnUpdate: 'CASCADE',
                 },
               },
-              start_at: {
+            winner_team: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                  model: 'teams',
+                  key: 'id',
+                  OnUpdate: 'CASCADE',
+                }
+            },
+            start_at: {
                 type: DataTypes.DATE,
               },
-              ended_at: {
+            ended_at: {
                 type: DataTypes.DATE,
               },
         }, {

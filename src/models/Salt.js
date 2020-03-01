@@ -22,7 +22,6 @@ class Salt extends Model {
         }, {
             sequelize,
             tableName: 'salt',
-            timestamps: false,
         })
     }
 

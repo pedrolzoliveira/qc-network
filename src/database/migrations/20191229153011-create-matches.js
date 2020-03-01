@@ -19,6 +19,9 @@ module.exports = {
             OnUpdate: 'CASCADE',
           },
         },
+        stage: {
+          type: Sequelize.INTEGER,
+        },
         winner_user: {
           type: Sequelize.INTEGER,    
           allowNull: true,

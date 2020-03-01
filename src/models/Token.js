@@ -20,7 +20,6 @@ class Token extends Model {
         }, {
             sequelize,
             tableName: 'token_blacklist',
-            timestamps: false,
         })
     }
 
