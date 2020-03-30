@@ -1,17 +1,34 @@
 <html>
     <head>
-        <script src="public/login.js" defer="defer"></script>
-        <script src="public/comum.js" defer="defer"></script>
+        <script src="public/js/login.js" defer="defer"></script>
+        <script src="public/animation/login.js" defer="defer"></script>
+        <script src="public/js/comum.js" defer="defer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="public/css/login.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div align="center" id="cadastro">
-           <form id="form" enctype="application/json"><br>
-                <label for="email">Email</label><br>
-                <input name="email" id="email" type="email"><br>
-                <label for="password">password</label><br>
-                <input name="password" id="password" type="password"><br>
-                <button>Entrar</button>
-           </form> 
+        <div id="main">
+            <form action="/singin" class="login-form" id="form">
+                <h1>Login</h1>
+
+                <div class="txtb">
+                    <input type="email" name="email" id="email">
+                    <span data-placeholder="Email"></span>
+                </div>
+
+                <div class="txtb">
+                    <input type="password" name="password" id="password">
+                    <span data-placeholder="Password"></span>
+                </div>
+                
+                <input type="submit" class="logbtn" value="Entrar">
+
+                <div class="bottom-text">
+                    Não tem uma conta? <a href="/">Cadastre-se</a>
+                    Esqueceu a senha? <a href="/recovery">Recuperar</a>
+                </div>
+            </form>
         </div>
     </body>
 </html>

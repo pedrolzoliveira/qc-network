@@ -9,7 +9,7 @@ const app = express();
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
-app.use('/', express.static(__dirname + '/static'));
+app.use('/public', express.static(__dirname + '/static'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(routes);

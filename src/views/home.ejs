@@ -1,12 +1,44 @@
 <html>
     <head>
-        <script src="public/home.js" defer="defer"></script>
+        <script src="public/js/home.js" defer="defer"></script>
+        <link rel="stylesheet" href="/public/css/home.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     </head>
-    <body>
-        Bem vindo, <%= props.user.name %>!<br>
-        <a href="/tournaments">Torneios</a><br>
-        <form action="/logout" id="formulario" method="POST">
-            <input type="submit" value="Deslogar">
-        </form>
+    <body>  
+        <header>
+            <div class="menu">
+                <li class="item">
+                    <a href="" class="btn">Profile</a>
+                    <div class="smenu">
+                        <a href="">Posts</a>
+                        <a href="">Pictures</a>
+                    </div>
+                </li>
+
+                <li class="item">
+                    <a href="" class="btn">Torneios</a>
+                    <div class="smenu">
+                        <a href="">Meus Torneios</a>
+                        <a href="">Novos Torneios</a>
+                    </div>
+                </li>
+
+                <li class="item">
+                    <a href="" class="btn">Settings</a>
+                    <div class="smenu">
+                        <a href="">Password</a>
+                        <a href="">Language</a>
+                    </div>
+                </li>
+
+                <li class="item">
+                    <a href="/logout" class="btn">Logout</a>
+                </li>
+
+            </div>
+        </header>       
+        <div class="main">
+            
+        </div>
     </body>
 </html>

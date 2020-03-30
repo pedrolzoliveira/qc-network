@@ -30,6 +30,15 @@ module.exports = {
         }
     },
 
+    async Recovery(req, res) {
+        try {
+            return res.render('recovery');
+        } catch(err) {
+            console.error(err);
+            return res.render('error', {error: err.message});
+        }
+    },
+
     async Error404(req, res) {
         try {
             return res.render('error', {error: 'Page not found'});
@@ -39,12 +48,5 @@ module.exports = {
         }
     },
 
-    async PlayerCreate(req, res) {
-        try {
-            
-        } catch(err) {
-            console.error(err);
-            return res.render('error', {error: err.message});
-        }
-    },
+   
 };

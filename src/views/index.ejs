@@ -1,22 +1,45 @@
 <html>
     <head>
-        <script src="public/index.js" defer="defer"></script>
-        <script src="public/comum.js" defer="defer"></script>
+        <script src="public/js/index.js" defer="defer"></script>
+        <script src="public/animation/index.js" defer="defer"></script>
+        <script src="public/js/comum.js" defer="defer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="public/css/index.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div align="center" id="cadastro">
-           <form id="form" enctype="application/json"><br>
-                <label for="nome">Nome</label><br>
-                <input name="name" id="nome" type="text"><br>
-                <label for="email">Email</label><br>
-                <input name="email" id="email" type="email"><br>
-                <label for="password">Password</label><br>
-                <input name="password" id="password" type="password"><br>
-                <label for="password_confirm">Confirm Password</label><br>
-                <input id="password_confirm" type="password"><br>
-                <button>Cadastrar</button>
+        <div id="cadastro">
+           <form id="form" enctype="application/json" class="signup-form"><br>
+                
+                <h1>Cadastre-se</h1>
+
+                <div class="txtb">
+                    <input name="name" id="nome" type="text">
+                    <span data-placeholder="Nome"></span>
+                </div>
+                
+                <div class="txtb">
+                    <input name="email" id="email" type="email">
+                    <span data-placeholder="Email"></span>
+                </div>
+                
+                <div class="txtb">
+                    <input name="password" id="password" type="password">
+                    <span data-placeholder="Password"></span>
+                </div>
+
+                <div class="txtb">
+                    <input id="password_confirm" type="password">
+                    <span data-placeholder="Confirm Password"></span>
+                </div>
+
+                <input type="submit" value="Cadastrar" class="cadbtn">
+
+                <div class="bottom-text">
+                    Já tem uma conta? <a href="/login">Entrar</a>
+                </div>
            </form> 
+           
         </div>
-        <a href="/login"><button>Entrar</button></a>
     </body>
 </html>

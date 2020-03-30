@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="public/css/recovery.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+        <script src="public/animation/recovery.js" defer="defer"></script>
+        <script src="public/js/recovery.js" defer="defer"></script>
+        <script src="public/js/comum.js" defer="defer"></script>
+    </head>
+    <body>
+        <div class="main">
+            <form action="/recoveryacc" class="recovery-form" method="POST" id="form">
+                
+                <h1>Recuperar</h1>
+
+                <div class="txtb">
+                    <input type="text" name="email" id="email">
+                    <span data-placeholder="Email"></span>                    
+                </div>
+
+                <input type="submit" value="Enviar" class="recbtn">
+
+                <div class="bottom-text">
+                    Não tem uma conta? <a href="/">Cadastre-se</a><br>
+                    Já tem uma conta? <a href="/login">Entrar</a>
+                </div>
+            </form>
+        </div>
+        
+    </body>
+</html>

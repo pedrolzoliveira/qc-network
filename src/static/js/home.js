@@ -1,4 +1,4 @@
-formulario.addEventListener('submit', function(e) {
+/*formulario.addEventListener('submit', function(e) {
     e.preventDefault();
     console.log('deslogando...');
     fetch('/logout', {
@@ -15,3 +15,7 @@ formulario.addEventListener('submit', function(e) {
     .catch(err => console.log(err.message))
 });
 
+
+setInterval(() => {
+    location.reload();
+}, 3000);*/

@@ -13,11 +13,13 @@ const routes = express.Router();
 routes.get('/', auth, PageController.Home);
 routes.get('/login', auth, PageController.Login);
 routes.get('/tournaments', auth, PageController.Tournaments);
+routes.get('/recovery', PageController.Recovery);
 routes.get('/*', PageController.Error404);
 
 routes.post('/logout', UserController.logout);
 routes.post('/signup', UserController.store);
 routes.post('/session', UserController.login);
+routes.post('/recoveryacc', UserController.recovery);
 routes.post('/addteammatch', MatchController.addTeam);
 routes.post('/addusermatch', MatchController.addUser);
 routes.post('/team', auth, TeamController.store);

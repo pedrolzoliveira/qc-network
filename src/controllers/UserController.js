@@ -98,9 +98,23 @@ async function logout(req, res) {
     }
 }
 
+
 module.exports = {
     index,
     store,
     login,
-    logout
+    logout,
+    async recovery(req, res) {
+        try {
+            const {email} = req.body;
+            const user = await User.findOne({where: {email: email}});
+            if (!user)
+                return res.json({ok: false, error: 'email não cadastrado!'});
+            
+            return res.json({ok: true});
+        } catch(err) {
+            console.error(err);
+            return res.json({ok: false, error: err.message});
+        }
+    }
 };
