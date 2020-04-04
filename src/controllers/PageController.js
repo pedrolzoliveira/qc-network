@@ -39,6 +39,42 @@ module.exports = {
         }
     },
 
+    async Logout(req, res) {
+        try {
+            return res.render('logout');
+        } catch (err) {
+            console.log(err);
+            return res.render('error', {error: err.message});
+        }
+    },
+
+    async About(req, res) {
+        try {
+            return res.render('about');
+        } catch (err) {
+            console.log(err);
+            return res.render('error', {error: err.message});
+        }
+    },
+
+    async Settings(req, res) {
+        try {
+            return res.render('settings');
+        } catch (err) {
+            console.log(err);
+            return res.render('error', {error: err.message});
+        }
+    },
+
+    async Profile(req, res) {
+        try {
+            return res.render('profile');
+        } catch (err) {
+            console.log(err);
+            return res.render('error', {error: err.message});
+        }
+    }, 
+
     async Error404(req, res) {
         try {
             return res.render('error', {error: 'Page not found'});

@@ -1,5 +1,33 @@
 <html>
+    <head>
+        <link rel="stylesheet" href="/public/css/pagemodel.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    </head>
     <body>
+        <header>
+            <div class="menu">
+                <ul class="menu">
+                    <li class="menu">
+                        <a href="/profile">Perfil</a>
+                    </li>
+                    <li class="menu">
+                        <a href="/">Home</a>
+                    </li>                 
+                    <li class="menu" id="selected">
+                        <a href="/tournaments">Torneios</a>
+                    </li>
+                    <li class="menu">
+                        <a href="/about">Sobre</a>
+                    </li>                       
+                    <li class="menu">
+                        <a href="/settings">Configurações</a>
+                    </li>
+                    <li class="menu">
+                        <a href="/logout">Sair</a>
+                    </li>                    
+                </ul>
+            </div>
+        </header>
         Error: <%= error %>
     </body>
 </html>
